@@ -1,6 +1,5 @@
 package com.example.productstore.presentation.main
 
-import android.os.Handler
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
@@ -21,9 +20,7 @@ import ru.terrakok.cicerone.commands.Forward
 class MainPresenter : MvpPresenter<MvpView>() {
 
     override fun onFirstViewAttach() {
-        Handler().postDelayed({
-            App.router.navigateTo(Screens.ProductListScreen())
-        }, 2000)
+        App.router.navigateTo(Screens.ProductListScreen())
     }
 
     fun getNavigator(
