@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/white"
     android:orientation="horizontal"
-    android:padding="@dimen/list_item_padding">
+    android:paddingStart="@dimen/list_item_padding"
+    android:paddingTop="@dimen/list_item_padding"
+    tools:ignore="RtlSymmetry">
 
     <ImageView
         android:id="@+id/product_small_image"
@@ -16,24 +18,38 @@
 
     <TextView
         android:id="@+id/product_name"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/product_small_image"
+        android:layout_alignBottom="@id/product_small_image"
         android:layout_marginStart="@dimen/product_name_start_margin"
-        android:layout_weight="1"
+        android:layout_toStartOf="@id/product_price"
+        android:layout_toEndOf="@id/product_small_image"
         android:fontFamily="sans-serif-smallcaps"
         android:gravity="center_vertical"
+        android:text="Образец. Белый топ без верха."
         android:textColor="@android:color/black"
-        android:textSize="@dimen/text_size_product_name"
-        tools:text="Образец. Белый топ без верха." />
+        android:textSize="@dimen/text_size_product_name" />
 
     <TextView
         android:id="@+id/product_price"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/product_small_image"
+        android:layout_alignBottom="@id/product_small_image"
+        android:layout_alignParentEnd="true"
         android:layout_marginStart="@dimen/product_name_start_margin"
-        android:fontFamily="sans-serif-smallcaps"
-        android:gravity="center_vertical|end"
+        android:layout_marginEnd="@dimen/list_item_padding"
+        android:gravity="center|end"
+        android:text="1234.00р"
         android:textColor="@color/dark_gray"
-        android:textSize="@dimen/text_size_product_name"
-        tools:text="1234.00р" />
-</LinearLayout>
+        android:textSize="@dimen/text_size_product_name" />
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_below="@id/product_small_image"
+        android:layout_alignStart="@id/product_name"
+        android:layout_marginTop="@dimen/list_item_divider_margin"
+        android:background="@color/divider_color" />
+</RelativeLayout>
