@@ -1,7 +1,10 @@
 package com.example.productstore.presentation.base
 
 
+import android.os.Bundle
+import android.view.View
 import android.widget.Toast
+import android.widget.Toolbar
 import androidx.annotation.StringRes
 import com.example.productstore.other.extensions.visible
 import com.example.productstore.presentation.main.MainActivity
@@ -10,7 +13,12 @@ import kotlinx.android.synthetic.main.toolbar.*
 import moxy.MvpAppCompatFragment
 
 open class BaseFragment : MvpAppCompatFragment(), BaseView {
-    protected val toolbar = (activity as MainActivity).toolbar
+    protected lateinit var toolbar: Toolbar
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        toolbar = (activity as MainActivity).activity_toolbar
+    }
 
     override fun showMessage(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
@@ -25,6 +33,6 @@ open class BaseFragment : MvpAppCompatFragment(), BaseView {
     }
 
     override fun showToolbar(show: Boolean) {
-        (activity as MainActivity).toolbar_layout.visible = show
+        (activity as MainActivity).toolbar.visible = show
     }
 }
