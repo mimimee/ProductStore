@@ -6,18 +6,34 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.productstore.R
 
-class ProductListAdapter : RecyclerView.Adapter<ProductListAdapter.ProductHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHolder {
-        return ProductHolder(LayoutInflater.from(parent.context).inflate(R.layout.product_list_item, parent, false))
+private const val PRODUCT_TYPE = 100
+private const val PLACEHOLDER_TYPE = 200
+private const val LAST_ITEM_TYPE = 300
+
+class ProductListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    val data = mutableListOf(1,1,1,1,1,1,1,1,1,1,1,1,1,1,11)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when (viewType) {
+            PRODUCT_TYPE -> ProductHolder(LayoutInflater.from(parent.context).inflate(R.layout.product_list_item, parent, false))
+            PLACEHOLDER_TYPE -> PlaceHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_placeholder, parent, false))
+            else -> LastItemHolder(LayoutInflater.from(parent.context).inflate(R.layout.list_last_item, parent, false))
+        }
     }
 
-    override fun getItemCount(): Int {
-        return 7
+    override fun getItemViewType(position: Int): Int {
+        return when {
+            data.isEmpty() -> PLACEHOLDER_TYPE
+            position == itemCount - 1 -> LAST_ITEM_TYPE
+            else -> PRODUCT_TYPE
+        }
     }
 
-    override fun onBindViewHolder(holder: ProductHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {}
 
-    }
+    override fun getItemCount() = if (data.isEmpty()) 1 else data.size + 1
 
     inner class ProductHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    inner class PlaceHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    inner class LastItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }

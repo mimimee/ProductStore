@@ -5,11 +5,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import com.example.productstore.R
 import com.example.productstore.presentation.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_productlist.*
+import moxy.presenter.InjectPresenter
 
-class ProductListFragment : BaseFragment() {
+class ProductListFragment : BaseFragment(), ProductListView {
+
+    @InjectPresenter
+    lateinit var presenter: ProductListpresenter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_productlist, container, false)
@@ -26,6 +31,10 @@ class ProductListFragment : BaseFragment() {
     }
 
     private fun setupRecycler() {
-        product_recycler.adapter = ProductListAdapter()
+        product_recycler.adapter = presenter.adapter
+    }
+
+    private fun setupClicks() {
+        fab.setOnClickListener {  }
     }
 }

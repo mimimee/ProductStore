@@ -4,20 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context=".presentation.productlist.ProductListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/product_recycler"
-        tools:listitem="@layout/product_list_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="4"
+        tools:listitem="@layout/product_list_item" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
+        android:clickable="true"
+        android:focusable="true"
         android:src="@drawable/ic_add_white_48dp"
-        app:backgroundTint="@color/mainBlue" />
+        app:backgroundTint="@color/mainBlue"
+        app:rippleColor="@color/lightBlue" />
 </FrameLayout>

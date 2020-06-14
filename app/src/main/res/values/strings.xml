@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ProductStore</string>
     <string name="products">Products</string>
+    <string name="your_list_is_empty">Your list is empty.</string>
 </resources>

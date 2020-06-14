@@ -12,8 +12,10 @@
     <dimen name="small_picture_corner_radius">24dp</dimen>
     <dimen name="small_picture_size">48dp</dimen>
     <dimen name="divider_height">1dp</dimen>
+    <dimen name="item_last_size">88dp</dimen>
 
     <!--    Text-->
     <dimen name="text_size_product_name">16sp</dimen>
+    <dimen name="text_size_product_placeholder">36sp</dimen>
 
 </resources>
