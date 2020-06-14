@@ -5,4 +5,5 @@
     <color name="colorAccent">#D81B60</color>
     <color name="mainBlue">#1E6EDC</color>
     <color name="loader_background">#CCFFFFFF</color>
+    <color name="dark_gray">#CC2E2E2E</color>
 </resources>

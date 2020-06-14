@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--    Margin-->
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="product_name_start_margin">4dp</dimen>
+
+    <!--    Padding-->
+    <dimen name="list_item_padding">8dp</dimen>
+
+    <!--    Size-->
+    <dimen name="small_picture_corner_radius">24dp</dimen>
+    <dimen name="small_picture_size">48dp</dimen>
+
+    <!--    Text-->
+    <dimen name="text_size_product_name">16sp</dimen>
+
 </resources>
