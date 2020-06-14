@@ -9,4 +9,5 @@ interface BaseView : MvpView {
     fun showMessage(message: String)
     fun showMessage(resId: Int)
     fun showLoader(show: Boolean)
+    fun showToolbar(show: Boolean)
 }
