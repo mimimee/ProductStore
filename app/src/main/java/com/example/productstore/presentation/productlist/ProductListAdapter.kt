@@ -1,10 +1,14 @@
 package com.example.productstore.presentation.productlist
 
+import android.graphics.Bitmap
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.productstore.R
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.product_list_item.view.*
 
 private const val PRODUCT_TYPE = 100
 private const val PLACEHOLDER_TYPE = 200
@@ -12,7 +16,9 @@ private const val LAST_ITEM_TYPE = 300
 
 class ProductListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    val data = mutableListOf(1,1,1,1,1,1,1,1,1,1,1,1,1,1,11)
+    val data = mutableListOf(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 11)
+    var pic: Uri? = null
+    var thumbnail: Bitmap? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             PRODUCT_TYPE -> ProductHolder(LayoutInflater.from(parent.context).inflate(R.layout.product_list_item, parent, false))
@@ -29,11 +35,23 @@ class ProductListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {}
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (holder is ProductHolder) holder.bind()
+    }
 
     override fun getItemCount() = if (data.isEmpty()) 1 else data.size + 1
 
-    inner class ProductHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    inner class ProductHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        fun bind() {
+            Picasso.get()
+                .load(pic)
+                .centerCrop()
+                .resizeDimen(R.dimen.small_picture_size, R.dimen.small_picture_size)
+                .into(itemView.product_small_image)
+        }
+    }
+
     inner class PlaceHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     inner class LastItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }

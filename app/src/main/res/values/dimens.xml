@@ -9,7 +9,7 @@
     <dimen name="list_item_padding">12dp</dimen>
 
     <!--    Size-->
-    <dimen name="small_picture_corner_radius">24dp</dimen>
+    <dimen name="small_picture_corner_radius">4dp</dimen>
     <dimen name="small_picture_size">48dp</dimen>
     <dimen name="divider_height">1dp</dimen>
     <dimen name="item_last_size">88dp</dimen>

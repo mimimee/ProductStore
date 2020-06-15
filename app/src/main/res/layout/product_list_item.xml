@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -9,22 +10,30 @@
     android:paddingTop="@dimen/list_item_padding"
     tools:ignore="RtlSymmetry">
 
-    <ImageView
-        android:id="@+id/product_small_image"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/product_card"
         android:layout_width="@dimen/small_picture_size"
         android:layout_height="@dimen/small_picture_size"
-        android:background="@drawable/small_picture_rounded"
-        android:src="@mipmap/ic_launcher" />
+        app:cardCornerRadius="@dimen/small_picture_corner_radius">
+
+        <ImageView
+            android:id="@+id/product_small_image"
+            android:layout_width="@dimen/small_picture_size"
+            android:layout_height="@dimen/small_picture_size"
+            android:background="@drawable/small_picture_rounded"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_launcher" />
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/product_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/product_small_image"
-        android:layout_alignBottom="@id/product_small_image"
+        android:layout_alignTop="@id/product_card"
+        android:layout_alignBottom="@id/product_card"
         android:layout_marginStart="@dimen/product_name_start_margin"
         android:layout_toStartOf="@id/product_price"
-        android:layout_toEndOf="@id/product_small_image"
+        android:layout_toEndOf="@id/product_card"
         android:fontFamily="sans-serif-smallcaps"
         android:gravity="center_vertical"
         android:text="Образец. Белый топ без верха."
@@ -35,8 +44,8 @@
         android:id="@+id/product_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/product_small_image"
-        android:layout_alignBottom="@id/product_small_image"
+        android:layout_alignTop="@id/product_card"
+        android:layout_alignBottom="@id/product_card"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="@dimen/product_name_start_margin"
         android:layout_marginEnd="@dimen/list_item_padding"
@@ -48,7 +57,7 @@
     <View
         android:layout_width="wrap_content"
         android:layout_height="1dp"
-        android:layout_below="@id/product_small_image"
+        android:layout_below="@id/product_card"
         android:layout_alignStart="@id/product_name"
         android:layout_marginTop="@dimen/list_item_divider_margin"
         android:background="@color/divider_color" />

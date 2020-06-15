@@ -2,6 +2,7 @@ package com.example.productstore
 
 import android.app.Application
 import android.content.Context
+import io.realm.Realm
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.Router
@@ -11,6 +12,7 @@ class App : Application() {
         super.onCreate()
         INSTANCE = this
         cicerone = Cicerone.create()
+        Realm.init(this)
     }
 
     companion object {
