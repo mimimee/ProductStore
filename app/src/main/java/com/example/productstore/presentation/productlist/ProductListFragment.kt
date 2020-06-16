@@ -1,14 +1,17 @@
 package com.example.productstore.presentation.productlist
 
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.productstore.R
+import com.example.productstore.data.db.entity.ProductEntity
+import com.example.productstore.data.db.repository.ProductsRepository
 import com.example.productstore.presentation.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_productlist.*
 import moxy.presenter.InjectPresenter
@@ -18,7 +21,6 @@ class ProductListFragment : BaseFragment(), ProductListView {
     lateinit var presenter: ProductListpresenter
 
     val REQUEST_IMAGE_GET = 1
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_productlist, container, false)
@@ -39,8 +41,16 @@ class ProductListFragment : BaseFragment(), ProductListView {
         product_recycler.adapter = presenter.adapter
     }
 
+    @SuppressLint("CheckResult")
     private fun setupClicks() {
         fab.setOnClickListener { selectImage() }
+        ProductsRepository.insertItem(ProductEntity("test", 100F))
+            .doOnSubscribe { Log.d("kek", Thread.currentThread().name + "onSub") }
+            .doFinally { Log.d("kek", Thread.currentThread().name + " fin") }
+            .subscribe {
+                Log.d("kek", Thread.currentThread().name + " subs")
+                it.toString()
+            }
     }
 
 
@@ -56,9 +66,7 @@ class ProductListFragment : BaseFragment(), ProductListView {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_IMAGE_GET && resultCode == Activity.RESULT_OK) {
             val pictureUri = data?.data
-            val bitMap = MediaStore.Images.Media.getBitmap(context?.contentResolver, pictureUri)
             presenter.adapter.pic = pictureUri
-            presenter.adapter.thumbnail = bitMap
             presenter.adapter.notifyDataSetChanged()
         }
     }

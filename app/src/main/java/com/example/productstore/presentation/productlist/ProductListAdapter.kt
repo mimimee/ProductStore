@@ -18,7 +18,6 @@ class ProductListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     val data = mutableListOf(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 11)
     var pic: Uri? = null
-    var thumbnail: Bitmap? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             PRODUCT_TYPE -> ProductHolder(LayoutInflater.from(parent.context).inflate(R.layout.product_list_item, parent, false))

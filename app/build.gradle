@@ -37,6 +37,9 @@ android {
 dependencies {
     def ciceroneVersion = "5.0.0"
     def moxyVersion = "2.1.2"
+    def picassoVersion = "2.71828"
+    def rxJavaVersion = "2.2.19"
+    def rxAndroidVersion = "2.1.1"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -57,5 +60,9 @@ dependencies {
     kapt "com.github.moxy-community:moxy-compiler:$moxyVersion"
 
     //Picasso
-    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation "com.squareup.picasso:picasso:$picassoVersion"
+
+    //RxJava
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
 }
