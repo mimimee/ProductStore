@@ -1,5 +1,6 @@
 package com.example.productstore.data.db.repository
 
+import android.util.Log
 import com.example.productstore.data.db.entity.ProductEntity
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -11,6 +12,7 @@ object ProductsRepository {
     fun insertItem(productItem: ProductEntity): Observable<ProductEntity> {
         return Observable.just(productItem)
             .doOnNext { nextItem ->
+                Log.d("kek", Thread.currentThread().name + " onNext")
                 val realm = Realm.getDefaultInstance()
                 val maxValue = realm.where<ProductEntity>().max("id")
                 val index = if (maxValue == null) 0 else maxValue.toLong() + 1
