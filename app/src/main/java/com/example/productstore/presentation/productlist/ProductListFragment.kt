@@ -73,7 +73,7 @@ class ProductListFragment : BaseFragment(), ProductListView {
                 .setStartDelay(50)
                 .setDuration(150)
                 .alpha(0F)
-                .setListener(presenter.getFabAnimatorListener { fab.visible = false })
+                .setListener(presenter.getAnimatorListenerAdapter { fab.visible = false })
         }
     }
 

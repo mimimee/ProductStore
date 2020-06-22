@@ -1,6 +1,7 @@
 package com.example.productstore.presentation.productlist
 
 import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import com.example.productstore.App
 import com.example.productstore.other.cicerone.Screens
 import moxy.InjectViewState
@@ -16,15 +17,11 @@ class ProductListPresenter : MvpPresenter<ProductListView>() {
         viewState.showFab(false)
     }
 
-    fun getFabAnimatorListener(onEnd: () -> Unit): Animator.AnimatorListener = object : Animator.AnimatorListener {
+    fun getAnimatorListenerAdapter(onEnd: () -> Unit) = object : AnimatorListenerAdapter() {
         override fun onAnimationEnd(animation: Animator?) {
             onEnd.invoke()
             App.router.navigateTo(Screens.ProductDetailsScreen())
         }
-
-        override fun onAnimationRepeat(animation: Animator?) {}
-        override fun onAnimationCancel(animation: Animator?) {}
-        override fun onAnimationStart(animation: Animator?) {}
     }
 
     fun onViewCreated() {
