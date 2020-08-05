@@ -7,4 +7,5 @@
 
     <string name="name">Name</string>
     <string name="price">Price</string>
+    <string name="new_product_created">New product created!</string>
 </resources>

@@ -41,15 +41,19 @@
 
     <ImageView
         android:id="@+id/add_image_btn"
-        android:layout_width="@dimen/picture_size"
-        android:layout_height="@dimen/picture_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8"
-        android:src="@drawable/img_button_selector"
         android:clickable="true"
-        android:focusable="true" />
+        android:focusable="true"
+        android:maxWidth="@dimen/picture_size_max"
+        android:maxHeight="@dimen/picture_size_max"
+        android:minWidth="@dimen/picture_size"
+        android:minHeight="@dimen/picture_size"
+        android:src="@drawable/img_button_selector" />
 
     <Button
-        android:id="@+id/sendBtn"
+        android:id="@+id/add_product_btn"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

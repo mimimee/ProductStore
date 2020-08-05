@@ -1,14 +1,11 @@
 package com.example.productstore.presentation.productdetails
 
-
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.postDelayed
 import com.example.productstore.App
 import com.example.productstore.R
 import com.example.productstore.other.extensions.showBackButton
@@ -27,12 +24,18 @@ class ProductDetailsFragment : BaseFragment(), ProductDetailsView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupToolbar()
-        sendBtn.setOnClickListener { testSend() }
+        setupClicks()
     }
 
     private fun setupToolbar() {
         toolbar.title = getString(R.string.add_product)
         toolbar.showBackButton(true) { App.router.exit() }
+    }
+
+    private fun setupClicks() {
+        add_product_btn.setOnClickListener {
+            presenter.onAddProductClicked(name_et.text.toString(), price_et.text.toString())
+        }
     }
 
     private fun testSend() {

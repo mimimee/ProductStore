@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.productstore.R
 import com.example.productstore.data.db.entity.Product
+import kotlinx.android.synthetic.main.product_list_item.view.*
 
 private const val PRODUCT_TYPE = 100
 private const val PLACEHOLDER_TYPE = 200
@@ -13,7 +14,7 @@ private const val LAST_ITEM_TYPE = 300
 
 class ProductListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    val data = mutableListOf<Product>()
+    var data = arrayListOf<Product>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
@@ -32,19 +33,23 @@ class ProductListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder is ProductHolder) holder.bind()
+        if (holder is ProductHolder) holder.bind(data[position])
     }
 
     override fun getItemCount() = if (data.isEmpty()) 1 else data.size + 1
 
     inner class ProductHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-        fun bind() {
+        fun bind(item: Product) {
 //            Picasso.get()
 //                .load(pic)
 //                .centerCrop()
 //                .resizeDimen(R.dimen.small_picture_size, R.dimen.small_picture_size)
 //                .into(itemView.product_small_image)
+
+            itemView.run {
+                product_name.text = item.name
+                product_price.text = item.price.toString()
+            }
         }
     }
 
