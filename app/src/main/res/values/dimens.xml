@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--    Margin-->
-    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="margin_8">8dp</dimen>
+    <dimen name="margin_16">16dp</dimen>
     <dimen name="product_name_start_margin">12dp</dimen>
     <dimen name="list_item_divider_margin">12dp</dimen>
 
     <!--    Padding-->
     <dimen name="list_item_padding">12dp</dimen>
+    <dimen name="padding_16">16dp</dimen>
 
     <!--    Size-->
     <dimen name="small_picture_corner_radius">4dp</dimen>
     <dimen name="small_picture_size">48dp</dimen>
+    <dimen name="picture_size">64dp</dimen>
     <dimen name="divider_height">1dp</dimen>
     <dimen name="item_last_size">88dp</dimen>
 

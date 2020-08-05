@@ -2,7 +2,7 @@ package com.example.productstore
 
 import android.app.Application
 import android.content.Context
-import io.realm.Realm
+import com.example.productstore.data.db.ProductsDataBase
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.Router
@@ -12,11 +12,12 @@ class App : Application() {
         super.onCreate()
         INSTANCE = this
         cicerone = Cicerone.create()
-        Realm.init(this)
+        dataBase = ProductsDataBase.getInstance()
     }
 
     companion object {
         lateinit var INSTANCE: App
+        lateinit var dataBase: ProductsDataBase
         private lateinit var cicerone: Cicerone<Router>
 
         val context: Context
@@ -24,6 +25,7 @@ class App : Application() {
 
         val router: Router
             get() = cicerone.router
+
 
         fun setNavigator(navigator: Navigator) = cicerone.navigatorHolder.setNavigator(navigator)
         fun removeNavigator() = cicerone.navigatorHolder.removeNavigator()

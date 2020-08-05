@@ -2,6 +2,7 @@ package com.example.productstore.presentation.base
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import android.widget.Toolbar
@@ -18,6 +19,7 @@ open class BaseFragment : MvpAppCompatFragment(), BaseView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         toolbar = (activity as MainActivity).activity_toolbar
+        Log.d("kek", "${this::class.simpleName} onViewCreated")
     }
 
     override fun showMessage(message: String) {

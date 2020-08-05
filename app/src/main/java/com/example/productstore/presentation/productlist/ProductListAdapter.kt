@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.productstore.R
-import com.example.productstore.data.db.entity.ProductEntity
+import com.example.productstore.data.db.entity.Product
 
 private const val PRODUCT_TYPE = 100
 private const val PLACEHOLDER_TYPE = 200
@@ -13,7 +13,7 @@ private const val LAST_ITEM_TYPE = 300
 
 class ProductListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    val data = mutableListOf<ProductEntity>()
+    val data = mutableListOf<Product>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {

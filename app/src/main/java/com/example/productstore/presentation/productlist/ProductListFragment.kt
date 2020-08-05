@@ -1,6 +1,5 @@
 package com.example.productstore.presentation.productlist
 
-
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -28,7 +27,6 @@ class ProductListFragment : BaseFragment(), ProductListView {
         setupToolbar()
         setupRecycler()
         setupClicks()
-        setupFab()
     }
 
     private fun setupToolbar() {
@@ -40,23 +38,8 @@ class ProductListFragment : BaseFragment(), ProductListView {
         product_recycler.adapter = presenter.adapter
     }
 
-    private fun setupFab() {
-        fab.setOnClickListener { presenter.onFabClick() }
-    }
-
     private fun setupClicks() {
-
-//        val subscribe = ProductsRepository.insertItem(ProductEntity("test", 100F))
-//            .doOnSubscribe { Log.d("kek", Thread.currentThread().name + " doOnSubscribe") }
-//            .doFinally { Log.d("kek", Thread.currentThread().name + " doFinally") }
-//            .subscribe {
-//                Log.d("kek", Thread.currentThread().name + " subs")
-//                it.toString()
-//                val r = Realm.getDefaultInstance()
-//                val k = r.where<ProductEntity>().findAll()
-//                Log.d("kek2", k.toString())
-//            }
-
+        fab.setOnClickListener { presenter.onFabClick() }
     }
 
     override fun showFab(show: Boolean) {
@@ -87,10 +70,12 @@ class ProductListFragment : BaseFragment(), ProductListView {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == REQUEST_IMAGE_GET && resultCode == Activity.RESULT_OK) {
-            val pictureUri = data?.data
-//            presenter.adapter.pic = pictureUri
-            presenter.adapter.notifyDataSetChanged()
+        when (requestCode) {
+            REQUEST_IMAGE_GET -> if (resultCode == Activity.RESULT_OK) {
+                val pictureUri = data?.data
+//               presenter.adapter.pic = pictureUri
+                presenter.adapter.notifyDataSetChanged()
+            }
         }
     }
 }

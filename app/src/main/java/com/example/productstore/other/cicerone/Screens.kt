@@ -12,6 +12,12 @@ object Screens {
     }
 
     class ProductDetailsScreen(private val bundle: Bundle? = null) : SupportAppScreen() {
-        override fun getFragment(): Fragment = ProductDetailsFragment().apply { arguments = bundle }
+        private val fragment = ProductDetailsFragment()
+
+        override fun getFragment(): Fragment = fragment.apply { arguments = bundle }
+
+        constructor(targetFragment: Fragment, requestCode: Int, bundle: Bundle? = null) : this(bundle) {
+            fragment.setTargetFragment(targetFragment, requestCode)
+        }
     }
 }
