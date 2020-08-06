@@ -10,8 +10,6 @@ import kotlinx.coroutines.launch
 import moxy.InjectViewState
 import moxy.MvpPresenter
 
-const val REQUEST_IMAGE_GET = 1
-
 @InjectViewState
 class ProductListPresenter : MvpPresenter<ProductListView>() {
     private val uiScope = CoroutineScope(Dispatchers.Main)
@@ -35,11 +33,11 @@ class ProductListPresenter : MvpPresenter<ProductListView>() {
 
     private fun displayProductList() {
         uiScope.launch {
-            viewState.showLoader(true)
             val productList = App.dataBase.productsDao.getAllProducts()
-            adapter.data = productList as ArrayList
-            adapter.notifyDataSetChanged()
-            viewState.showLoader(false)
+            if (adapter.data != productList) {
+                adapter.data = productList as ArrayList
+                adapter.notifyItemRangeChanged(0, productList.size)
+            }
         }
     }
 }

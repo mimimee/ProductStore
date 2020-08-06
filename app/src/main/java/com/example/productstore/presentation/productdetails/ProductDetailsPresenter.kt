@@ -8,9 +8,12 @@ import kotlinx.coroutines.*
 import moxy.InjectViewState
 import moxy.MvpPresenter
 
+const val REQUEST_IMAGE_GET = 1
+
 @InjectViewState
 class ProductDetailsPresenter : MvpPresenter<ProductDetailsView>() {
     private val uiScope = CoroutineScope(Dispatchers.Main)
+    val editingMode = false
     var pictureUri: Uri? = null
 
     fun onAddProductClicked(productName: String, productPrice: String) {
@@ -19,12 +22,17 @@ class ProductDetailsPresenter : MvpPresenter<ProductDetailsView>() {
             withContext(Dispatchers.IO) {
                 delay(1000)
                 val parsedPrice = parsePrice(productPrice)
-                val product = Product(productName, parsedPrice, pictureUri.toString())
+                val product = Product(productName, parsedPrice)
+                if (pictureUri != null) product.pictureUri = pictureUri.toString()
                 App.dataBase.productsDao.insert(product)
             }
             viewState.showLoader(false)
             viewState.showMessage(R.string.new_product_created)
         }
+    }
+
+    fun onAddImageClicked() {
+        viewState.selectImageFromGallery()
     }
 
     private fun parsePrice(price: String): Float = try {

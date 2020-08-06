@@ -3,6 +3,7 @@ package com.example.productstore.other.extensions
 import android.view.View
 import android.widget.Toolbar
 import com.example.productstore.R
+import java.lang.StringBuilder
 
 var View.visible: Boolean
     set(value) {
@@ -19,4 +20,9 @@ fun Toolbar.showBackButton(show: Boolean, action: (() -> Unit)? = null) {
         navigationIcon = null
         setNavigationOnClickListener(null)
     }
+}
+
+fun Float?.toRubles(): String {
+    val price = this?.toString() ?: "0"
+    return StringBuilder(price).append(" \u20BD").toString()
 }

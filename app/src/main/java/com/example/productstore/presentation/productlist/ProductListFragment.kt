@@ -1,7 +1,5 @@
 package com.example.productstore.presentation.productlist
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -57,25 +55,6 @@ class ProductListFragment : BaseFragment(), ProductListView {
                 .setDuration(150)
                 .alpha(0F)
                 .setListener(presenter.getAnimatorListenerAdapter { fab.visible = false })
-        }
-    }
-
-    private fun selectImage() {
-        val packageManager = activity?.packageManager ?: return
-        val intent = Intent(Intent.ACTION_GET_CONTENT).apply { type = "image/*" }
-        if (intent.resolveActivity(packageManager) != null) {
-            intent.putExtra("kektest", 123)
-            startActivityForResult(intent, REQUEST_IMAGE_GET)
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        when (requestCode) {
-            REQUEST_IMAGE_GET -> if (resultCode == Activity.RESULT_OK) {
-                val pictureUri = data?.data
-//               presenter.adapter.pic = pictureUri
-                presenter.adapter.notifyDataSetChanged()
-            }
         }
     }
 }

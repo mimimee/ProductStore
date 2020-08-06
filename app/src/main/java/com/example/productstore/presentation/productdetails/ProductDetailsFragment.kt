@@ -36,10 +36,23 @@ class ProductDetailsFragment : BaseFragment(), ProductDetailsView {
         add_product_btn.setOnClickListener {
             presenter.onAddProductClicked(name_et.text.toString(), price_et.text.toString())
         }
+
+        image_view.setOnClickListener { presenter.onAddImageClicked() }
     }
 
-    private fun testSend() {
-        activity?.onBackPressed()
-        targetFragment?.onActivityResult(14, Activity.RESULT_OK, Intent().putExtra("extra14", "extra14"))
+    override fun selectImageFromGallery() {
+        val packageManager = activity?.packageManager ?: return
+        val intent = Intent(Intent.ACTION_GET_CONTENT).apply { type = "image/*" }
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivityForResult(intent, REQUEST_IMAGE_GET)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_IMAGE_GET && resultCode == Activity.RESULT_OK) {
+            val imageUri = data?.data ?: return
+            presenter.pictureUri = imageUri
+            image_view.setImageURI(imageUri)
+        }
     }
 }

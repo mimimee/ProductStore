@@ -1,11 +1,14 @@
 package com.example.productstore.presentation.productlist
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.productstore.R
 import com.example.productstore.data.db.entity.Product
+import com.example.productstore.other.extensions.toRubles
 import kotlinx.android.synthetic.main.product_list_item.view.*
 
 private const val PRODUCT_TYPE = 100
@@ -40,15 +43,14 @@ class ProductListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     inner class ProductHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: Product) {
-//            Picasso.get()
-//                .load(pic)
-//                .centerCrop()
-//                .resizeDimen(R.dimen.small_picture_size, R.dimen.small_picture_size)
-//                .into(itemView.product_small_image)
-
             itemView.run {
                 product_name.text = item.name
-                product_price.text = item.price.toString()
+                product_price.text = item.price?.toRubles()
+
+                if (item.pictureUri.isNullOrEmpty()) return@run
+                Glide.with(context)
+                    .load(Uri.parse(item.pictureUri))
+                    .into(product_small_image)
             }
         }
     }
