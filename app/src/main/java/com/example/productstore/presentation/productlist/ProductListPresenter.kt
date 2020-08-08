@@ -15,6 +15,7 @@ import moxy.MvpPresenter
 @InjectViewState
 class ProductListPresenter : MvpPresenter<ProductListView>() {
     private val uiScope = CoroutineScope(Dispatchers.Main)
+    private var lastClickedItemPosition = -1
     val adapter = ProductListAdapter(
         onItemClickListener = ::openEditingScreen
     )
@@ -40,7 +41,7 @@ class ProductListPresenter : MvpPresenter<ProductListView>() {
             val productList = App.dataBase.productsDao.getAllProducts()
             if (adapter.data != productList && productList.isNotEmpty()) {
                 adapter.data = productList as ArrayList
-                adapter.notifyItemRangeChanged(0, productList.size)
+                if (lastClickedItemPosition >= 0) adapter.notifyItemRemoved(lastClickedItemPosition) else adapter.notifyDataSetChanged()
             } else if (productList.isEmpty()) {
                 adapter.data = productList as ArrayList
                 adapter.notifyDataSetChanged()
@@ -48,7 +49,8 @@ class ProductListPresenter : MvpPresenter<ProductListView>() {
         }
     }
 
-    private fun openEditingScreen(itemId: Long) {
+    private fun openEditingScreen(itemId: Long, itemPosition: Int) {
+        lastClickedItemPosition = itemPosition
         val bundle = Bundle().apply { putLong(EDIT_PRODUCT_ID, itemId) }
         App.router.navigateTo(Screens.ProductDetailsScreen(bundle))
     }

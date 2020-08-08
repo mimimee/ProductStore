@@ -1,6 +1,8 @@
 package com.example.productstore.presentation.productdetails
 
 import android.net.Uri
+import android.text.Editable
+import android.text.TextWatcher
 import com.example.productstore.App
 import com.example.productstore.R
 import com.example.productstore.data.db.entity.Product
@@ -10,25 +12,33 @@ import moxy.MvpPresenter
 
 private const val DEFAULT_PRICE = 0F
 const val REQUEST_IMAGE_GET = 1
-const val EDIT_PRODUCT_ID = "edit_product_id"
+const val EDIT_PRODUCT_ID = "EDIT_PRODUCT_ID"
 
 @InjectViewState
 class ProductDetailsPresenter : MvpPresenter<ProductDetailsView>() {
     private val uiScope = CoroutineScope(Dispatchers.Main)
     private var changingProduct: Product? = null
+    private var nameError = ""
+    private var priceError = ""
     var changedItemId: Long? = null
     var editingMode = false
     var selectedPictureUri: Uri? = null
+    var nameListener = getNameListener()
+    var priceListener = getPriceListener()
 
     override fun onFirstViewAttach() {
         changedItemId?.let { if (editingMode) displayItemForEditing(it) }
     }
 
     fun onFinalClick(productName: String, productPrice: String) {
-        if (editingMode)
+        if (!areFieldsValid(productName, productPrice)) {
+            viewState.setNameError(nameError)
+            viewState.setPriceError(priceError)
+        } else if (editingMode) {
             saveChanges(productName, productPrice)
-        else
+        } else {
             addProduct(productName, productPrice)
+        }
     }
 
     fun onCancelClicked() {
@@ -36,6 +46,31 @@ class ProductDetailsPresenter : MvpPresenter<ProductDetailsView>() {
             removeItem()
         else
             viewState.goBack()
+    }
+
+    private fun getNameListener() = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        override fun afterTextChanged(s: Editable) {
+            nameError = if (s.isEmpty()) App.context.getString(R.string.field_cannot_be_empty) else ""
+            viewState.setNameError(nameError)
+        }
+    }
+
+    private fun getPriceListener() = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        override fun afterTextChanged(s: Editable) {
+            priceError = if (s.isEmpty()) App.context.getString(R.string.field_cannot_be_empty) else ""
+            viewState.setPriceError(priceError)
+        }
+    }
+
+    private fun areFieldsValid(productName: String, productPrice: String): Boolean {
+        val emptyFieldError = App.context.getString(R.string.field_cannot_be_empty)
+        nameError = if (productName.isEmpty()) emptyFieldError else ""
+        priceError = if (productPrice.isEmpty()) emptyFieldError else ""
+        return priceError.isEmpty() && nameError.isEmpty()
     }
 
     private fun removeItem() {

@@ -32,6 +32,7 @@ class ProductDetailsFragment : BaseFragment(), ProductDetailsView {
         super.onViewCreated(view, savedInstanceState)
         setupToolbarAndTitles()
         setupClicks()
+        setupValidators()
     }
 
     private fun setupToolbarAndTitles() {
@@ -39,6 +40,11 @@ class ProductDetailsFragment : BaseFragment(), ProductDetailsView {
         toolbar.showBackButton(true) { goBack() }
         add_product_btn.text = getString(if (presenter.editingMode) R.string.save_changes else R.string.add_product)
         cancel_btn.text = getString(if (presenter.editingMode) R.string.remove_product else R.string.cancel)
+    }
+
+    private fun setupValidators() {
+        name_et.addTextChangedListener(presenter.nameListener)
+        price_et.addTextChangedListener(presenter.priceListener)
     }
 
     private fun setupClicks() {
@@ -54,6 +60,14 @@ class ProductDetailsFragment : BaseFragment(), ProductDetailsView {
             .load(Uri.parse(product?.pictureUri))
             .placeholder(R.drawable.ic_add_photo_light)
             .into(product_image)
+    }
+
+    override fun setNameError(text: String) {
+        name_input.error = text
+    }
+
+    override fun setPriceError(text: String) {
+        price_input.error = text
     }
 
     override fun goBack() {

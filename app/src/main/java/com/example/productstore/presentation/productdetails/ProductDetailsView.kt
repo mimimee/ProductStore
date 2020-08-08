@@ -9,5 +9,7 @@ import moxy.viewstate.strategy.StateStrategyType
 interface ProductDetailsView : BaseView {
     fun selectImageFromGallery()
     fun fillScreenForEditing(product: Product?)
+    fun setNameError(text: String)
+    fun setPriceError(text: String)
     fun goBack()
 }

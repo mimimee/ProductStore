@@ -16,7 +16,7 @@ private const val PLACEHOLDER_TYPE = 200
 private const val LAST_ITEM_TYPE = 300
 
 class ProductListAdapter(
-    private val onItemClickListener: (itemId: Long) -> Unit
+    private val onItemClickListener: (itemId: Long, itemPosition: Int) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var data = arrayListOf<Product>()
@@ -45,7 +45,7 @@ class ProductListAdapter(
 
     inner class ProductHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         init {
-            itemView.setOnClickListener { data[adapterPosition].id?.let { id -> onItemClickListener.invoke(id) } }
+            itemView.setOnClickListener { data[adapterPosition].id?.let { id -> onItemClickListener.invoke(id, adapterPosition) } }
         }
 
         fun bind(item: Product) {
