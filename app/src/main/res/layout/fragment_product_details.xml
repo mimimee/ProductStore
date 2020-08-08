@@ -62,7 +62,7 @@
         app:layout_constraintTop_toBottomOf="@id/price_input">
 
         <ImageView
-            android:id="@+id/image_view"
+            android:id="@+id/product_image"
             android:layout_width="@dimen/picture_size"
             android:layout_height="@dimen/picture_size"
             android:layout_gravity="center_vertical"

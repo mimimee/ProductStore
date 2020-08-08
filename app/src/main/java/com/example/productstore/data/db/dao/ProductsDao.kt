@@ -5,15 +5,18 @@ import com.example.productstore.data.db.entity.Product
 
 @Dao
 interface ProductsDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(product: Product)
-
-    @Update
-    fun update(product: Product)
-
-    @Delete
-    fun delete(product: Product)
+    @Query("select * from products_table where id == :productId")
+    suspend fun getProductById(productId: Long): Product
 
     @Query("select * from products_table")
     suspend fun getAllProducts(): List<Product>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(product: Product)
+
+    @Update
+    suspend fun update(product: Product)
+
+    @Delete
+    suspend fun delete(product: Product)
 }

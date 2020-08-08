@@ -15,7 +15,9 @@ private const val PRODUCT_TYPE = 100
 private const val PLACEHOLDER_TYPE = 200
 private const val LAST_ITEM_TYPE = 300
 
-class ProductListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ProductListAdapter(
+    private val onItemClickListener: (itemId: Long) -> Unit
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var data = arrayListOf<Product>()
 
@@ -42,6 +44,10 @@ class ProductListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun getItemCount() = if (data.isEmpty()) 1 else data.size + 1
 
     inner class ProductHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        init {
+            itemView.setOnClickListener { data[adapterPosition].id?.let { id -> onItemClickListener.invoke(id) } }
+        }
+
         fun bind(item: Product) {
             itemView.run {
                 product_name.text = item.name

@@ -2,8 +2,10 @@ package com.example.productstore.presentation.productlist
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.os.Bundle
 import com.example.productstore.App
 import com.example.productstore.other.cicerone.Screens
+import com.example.productstore.presentation.productdetails.EDIT_PRODUCT_ID
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -13,7 +15,9 @@ import moxy.MvpPresenter
 @InjectViewState
 class ProductListPresenter : MvpPresenter<ProductListView>() {
     private val uiScope = CoroutineScope(Dispatchers.Main)
-    val adapter = ProductListAdapter()
+    val adapter = ProductListAdapter(
+        onItemClickListener = ::openEditingScreen
+    )
 
     fun onViewCreated() {
         viewState.showFab(true)
@@ -39,5 +43,10 @@ class ProductListPresenter : MvpPresenter<ProductListView>() {
                 adapter.notifyItemRangeChanged(0, productList.size)
             }
         }
+    }
+
+    private fun openEditingScreen(itemId: Long) {
+        val bundle = Bundle().apply { putLong(EDIT_PRODUCT_ID, itemId) }
+        App.router.navigateTo(Screens.ProductDetailsScreen(bundle))
     }
 }
