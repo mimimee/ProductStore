@@ -38,9 +38,12 @@ class ProductListPresenter : MvpPresenter<ProductListView>() {
     private fun displayProductList() {
         uiScope.launch {
             val productList = App.dataBase.productsDao.getAllProducts()
-            if (adapter.data != productList) {
+            if (adapter.data != productList && productList.isNotEmpty()) {
                 adapter.data = productList as ArrayList
                 adapter.notifyItemRangeChanged(0, productList.size)
+            } else if (productList.isEmpty()) {
+                adapter.data = productList as ArrayList
+                adapter.notifyDataSetChanged()
             }
         }
     }

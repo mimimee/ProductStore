@@ -31,6 +31,22 @@ class ProductDetailsPresenter : MvpPresenter<ProductDetailsView>() {
             addProduct(productName, productPrice)
     }
 
+    fun onCancelClicked() {
+        if (editingMode)
+            removeItem()
+        else
+            viewState.goBack()
+    }
+
+    private fun removeItem() {
+        val product = changingProduct ?: return
+        uiScope.launch {
+            App.dataBase.productsDao.delete(product)
+            viewState.showMessage(R.string.product_removed)
+            viewState.goBack()
+        }
+    }
+
     private fun addProduct(productName: String, productPrice: String) {
         uiScope.launch {
             viewState.showLoader(true)
@@ -48,7 +64,7 @@ class ProductDetailsPresenter : MvpPresenter<ProductDetailsView>() {
         val product = (changingProduct ?: return).apply {
             name = productName
             price = parsePrice(productPrice)
-            pictureUri = selectedPictureUri.toString()
+            selectedPictureUri?.let { pictureUri = it.toString() }
         }
         uiScope.launch {
             App.dataBase.productsDao.update(product)

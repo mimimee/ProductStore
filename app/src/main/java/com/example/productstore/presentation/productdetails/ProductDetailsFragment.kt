@@ -38,12 +38,13 @@ class ProductDetailsFragment : BaseFragment(), ProductDetailsView {
         toolbar.title = getString(if (presenter.editingMode) R.string.edit_product else R.string.add_product)
         toolbar.showBackButton(true) { goBack() }
         add_product_btn.text = getString(if (presenter.editingMode) R.string.save_changes else R.string.add_product)
+        cancel_btn.text = getString(if (presenter.editingMode) R.string.remove_product else R.string.cancel)
     }
 
     private fun setupClicks() {
         add_product_btn.setOnClickListener { presenter.onFinalClick(name_et.text.toString(), price_et.text.toString()) }
         product_image.setOnClickListener { presenter.onAddImageClicked() }
-        cancel_btn.setOnClickListener { goBack() }
+        cancel_btn.setOnClickListener { presenter.onCancelClicked() }
     }
 
     override fun fillScreenForEditing(product: Product?) {

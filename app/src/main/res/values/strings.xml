@@ -2,6 +2,7 @@
     <string name="app_name">ProductStore</string>
     <string name="products">Products</string>
     <string name="add_product">Add product</string>
+    <string name="remove_product">Remove product</string>
     <string name="save_changes">Save changes</string>
     <string name="cancel">Cancel</string>
     <string name="edit_product">Edit product</string>
@@ -10,4 +11,5 @@
     <string name="price">Price</string>
     <string name="new_product_created">New product created!</string>
     <string name="changes_saved">Changes have been saved!</string>
+    <string name="product_removed">Product has been removed!</string>
 </resources>
