@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="horizontal"
+    android:paddingStart="@dimen/list_item_padding"
+    android:paddingTop="@dimen/list_item_padding"
+    tools:ignore="RtlSymmetry">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/product_card"
+        android:layout_width="@dimen/small_picture_size"
+        android:layout_height="@dimen/small_picture_size"
+        app:cardCornerRadius="@dimen/small_picture_corner_radius">
+
+        <ImageView
+            android:id="@+id/product_small_image"
+            android:layout_width="@dimen/small_picture_size"
+            android:layout_height="@dimen/small_picture_size"
+            android:background="@drawable/small_picture_rounded"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_outline_insert_photo" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/product_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/product_card"
+        android:layout_alignBottom="@id/product_card"
+        android:layout_marginStart="@dimen/product_name_start_margin"
+        android:layout_toStartOf="@id/product_price"
+        android:layout_toEndOf="@id/product_card"
+        android:fontFamily="sans-serif-smallcaps"
+        android:gravity="center_vertical"
+        android:text="Образец. Белый топ без верха."
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_size_product_name" />
+
+    <TextView
+        android:id="@+id/product_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/product_card"
+        android:layout_alignBottom="@id/product_card"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="@dimen/product_name_start_margin"
+        android:layout_marginEnd="@dimen/list_item_padding"
+        android:gravity="center|end"
+        android:text="1234.00р"
+        android:textColor="@color/dark_gray"
+        android:textSize="@dimen/text_size_product_name" />
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_below="@id/product_card"
+        android:layout_alignStart="@id/product_name"
+        android:layout_marginTop="@dimen/list_item_divider_margin"
+        android:background="@color/divider_color" />
+</RelativeLayout>
