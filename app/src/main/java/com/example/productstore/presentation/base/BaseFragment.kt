@@ -2,11 +2,10 @@ package com.example.productstore.presentation.base
 
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
-import android.widget.Toolbar
 import androidx.annotation.StringRes
+import androidx.appcompat.widget.Toolbar
 import com.example.productstore.other.extensions.visible
 import com.example.productstore.presentation.main.MainActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -19,7 +18,7 @@ open class BaseFragment : MvpAppCompatFragment(), BaseView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         toolbar = (activity as MainActivity).activity_toolbar
-        Log.d("kek", "${this::class.simpleName} onViewCreated")
+        (activity as MainActivity).setSupportActionBar(toolbar)
     }
 
     override fun showMessage(message: String) {

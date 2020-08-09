@@ -14,7 +14,8 @@
         android:id="@+id/product_card"
         android:layout_width="@dimen/small_picture_size"
         android:layout_height="@dimen/small_picture_size"
-        app:cardCornerRadius="@dimen/small_picture_corner_radius">
+        app:cardCornerRadius="@dimen/small_picture_corner_radius"
+        app:cardElevation="0dp">
 
         <ImageView
             android:id="@+id/product_small_image"
@@ -22,7 +23,7 @@
             android:layout_height="@dimen/small_picture_size"
             android:background="@drawable/small_picture_rounded"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_outline_insert_photo" />
+            android:src="@drawable/ic_box" />
     </androidx.cardview.widget.CardView>
 
     <TextView

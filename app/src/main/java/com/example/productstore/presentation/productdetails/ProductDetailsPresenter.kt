@@ -2,10 +2,10 @@ package com.example.productstore.presentation.productdetails
 
 import android.net.Uri
 import android.text.Editable
-import android.text.TextWatcher
 import com.example.productstore.App
 import com.example.productstore.R
 import com.example.productstore.data.db.entity.Product
+import com.example.productstore.other.abstractions.SimpleTextWatcher
 import kotlinx.coroutines.*
 import moxy.InjectViewState
 import moxy.MvpPresenter
@@ -48,18 +48,14 @@ class ProductDetailsPresenter : MvpPresenter<ProductDetailsView>() {
             viewState.goBack()
     }
 
-    private fun getNameListener() = object : TextWatcher {
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+    private fun getNameListener() = object : SimpleTextWatcher() {
         override fun afterTextChanged(s: Editable) {
             nameError = if (s.isEmpty()) App.context.getString(R.string.field_cannot_be_empty) else ""
             viewState.setNameError(nameError)
         }
     }
 
-    private fun getPriceListener() = object : TextWatcher {
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+    private fun getPriceListener() = object : SimpleTextWatcher() {
         override fun afterTextChanged(s: Editable) {
             priceError = if (s.isEmpty()) App.context.getString(R.string.field_cannot_be_empty) else ""
             viewState.setPriceError(priceError)
