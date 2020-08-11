@@ -48,14 +48,15 @@ class ProductDetailsFragment : BaseFragment(), ProductDetailsView {
     }
 
     private fun setupClicks() {
-        add_product_btn.setOnClickListener { presenter.onFinalClick(name_et.text.toString(), price_et.text.toString()) }
+        add_product_btn.setOnClickListener { presenter.onFinalClick(name_et.text.toString(), price_et.text.toString(), address_et.text.toString()) }
         product_image.setOnClickListener { presenter.onAddImageClicked() }
         cancel_btn.setOnClickListener { presenter.onCancelClicked() }
     }
 
     override fun fillScreenForEditing(product: Product?) {
-        name_et.setText(product?.name.toString())
+        name_et.setText(product?.name)
         price_et.setText(product?.price.toString())
+        address_et.setText(product?.storageAddress)
         Glide.with(this)
             .load(Uri.parse(product?.pictureUri))
             .placeholder(R.drawable.ic_add_photo_light)

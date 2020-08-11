@@ -44,11 +44,31 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/price_et"
-            android:maxLength="7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionNext"
+            android:inputType="numberDecimal"
+            android:maxLength="7" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/address_input"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/address"
+        app:boxStrokeColor="@color/mainBlue"
+        app:hintTextAppearance="@style/HintTextAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/price_input">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/address_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:imeOptions="actionDone"
-            android:inputType="numberDecimal"
+            android:inputType="text"
             android:text="" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -60,7 +80,7 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/price_input">
+        app:layout_constraintTop_toBottomOf="@id/address_input">
 
         <ImageView
             android:id="@+id/product_image"

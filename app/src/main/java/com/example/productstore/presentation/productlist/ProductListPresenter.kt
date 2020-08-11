@@ -2,9 +2,14 @@ package com.example.productstore.presentation.productlist
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.content.Intent
+import android.location.Address
+import android.location.Geocoder
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.widget.SearchView
 import com.example.productstore.App
+import com.example.productstore.R
 import com.example.productstore.data.db.entity.Product
 import com.example.productstore.other.cicerone.Screens
 import com.example.productstore.presentation.productdetails.EDIT_PRODUCT_ID
@@ -12,6 +17,7 @@ import com.example.productstore.presentation.productlist.EDITING_EVENT.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import moxy.InjectViewState
 import moxy.MvpPresenter
 
@@ -23,7 +29,8 @@ class ProductListPresenter : MvpPresenter<ProductListView>() {
     private var editingEvent: EDITING_EVENT? = null
     val searchQueryListener = getSearchQueryWatcher()
     val adapter = ProductListAdapter(
-        onItemClickListener = ::openEditingScreen
+        onItemClickListener = ::openEditingScreen,
+        onMapMarkerClickListener = ::openMapWithStorage
     )
 
     fun onViewCreated() {
@@ -69,6 +76,32 @@ class ProductListPresenter : MvpPresenter<ProductListView>() {
         lastClickedItemPosition = itemPosition
         val bundle = Bundle().apply { putLong(EDIT_PRODUCT_ID, itemId) }
         App.router.navigateTo(Screens.ProductDetailsScreen(bundle))
+    }
+
+    private fun openMapWithStorage(address: String?) {
+        if (address.isNullOrEmpty()) {
+            viewState.showMessage(R.string.no_address_found)
+            return
+        }
+        viewState.showLoader(true)
+        uiScope.launch {
+            var addressList = listOf<Address>()
+            withContext(Dispatchers.IO) {
+                val geoCoder = Geocoder(App.context)
+                addressList = geoCoder.getFromLocationName(address, 1)
+            }
+            if (addressList.isEmpty())
+                viewState.showMessage(R.string.no_address_found)
+            else {
+                val locationUri = Uri.parse("geo:0,0?q=$address")
+                val intent = Intent(Intent.ACTION_VIEW, locationUri)
+                if (intent.resolveActivity(App.context.packageManager) != null)
+                    App.context.startActivity(intent)
+                else
+                    viewState.showMessage(R.string.map_app_is_not_fount)
+            }
+            viewState.showLoader(false)
+        }
     }
 
     private fun getSearchQueryWatcher() = object : SearchView.OnQueryTextListener {

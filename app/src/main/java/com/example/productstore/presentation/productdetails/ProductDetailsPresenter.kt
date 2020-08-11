@@ -30,14 +30,14 @@ class ProductDetailsPresenter : MvpPresenter<ProductDetailsView>() {
         changedItemId?.let { if (editingMode) displayItemForEditing(it) }
     }
 
-    fun onFinalClick(productName: String, productPrice: String) {
+    fun onFinalClick(productName: String, productPrice: String, address: String) {
         if (!areFieldsValid(productName, productPrice)) {
             viewState.setNameError(nameError)
             viewState.setPriceError(priceError)
         } else if (editingMode) {
-            saveChanges(productName, productPrice)
+            saveChanges(productName, productPrice, address)
         } else {
-            addProduct(productName, productPrice)
+            addProduct(productName, productPrice, address)
         }
     }
 
@@ -78,11 +78,15 @@ class ProductDetailsPresenter : MvpPresenter<ProductDetailsView>() {
         }
     }
 
-    private fun addProduct(productName: String, productPrice: String) {
+    private fun addProduct(productName: String, productPrice: String, address: String) {
         uiScope.launch {
             viewState.showLoader(true)
             delay(1000)
-            val product = Product(productName, parsePrice(productPrice))
+            val product = Product(
+                name = productName,
+                price = parsePrice(productPrice),
+                storageAddress = address
+            )
             if (selectedPictureUri != null) product.pictureUri = selectedPictureUri.toString()
             App.dataBase.productsDao.insert(product)
             viewState.showLoader(false)
@@ -91,10 +95,11 @@ class ProductDetailsPresenter : MvpPresenter<ProductDetailsView>() {
         }
     }
 
-    private fun saveChanges(productName: String, productPrice: String) {
+    private fun saveChanges(productName: String, productPrice: String, address: String) {
         val product = (changingProduct ?: return).apply {
             name = productName
             price = parsePrice(productPrice)
+            storageAddress = address
             selectedPictureUri?.let { pictureUri = it.toString() }
         }
         uiScope.launch {

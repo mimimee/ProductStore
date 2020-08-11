@@ -6,7 +6,7 @@
     <string name="save_changes">Save changes</string>
     <string name="cancel">Cancel</string>
     <string name="edit_product">Edit product</string>
-    <string name="your_list_is_empty">Your list is empty.</string>
+    <string name="your_list_is_empty">Your list is empty</string>
     <string name="name">Name</string>
     <string name="price">Price</string>
     <string name="new_product_created">New product created!</string>
@@ -14,4 +14,7 @@
     <string name="product_removed">Product has been removed!</string>
     <string name="field_cannot_be_empty">Field cannot be empty </string>
     <string name="search">Search</string>
+    <string name="address">Address</string>
+    <string name="no_address_found">No address found</string>
+    <string name="map_app_is_not_fount">Map application is not found</string>
 </resources>
