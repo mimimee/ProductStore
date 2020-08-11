@@ -59,7 +59,7 @@ class ProductListFragment : BaseFragment(), ProductListView {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.seach_menu, menu)
+        inflater?.inflate(R.menu.productlist_menu, menu)
         val searchItem = menu?.findItem(R.id.menu_search_item)
         (searchItem?.actionView as SearchView).setOnQueryTextListener(presenter.searchQueryListener)
     }
