@@ -1,7 +1,7 @@
 package com.example.productstore.other.extensions
 
 import android.view.View
-import android.widget.Toolbar
+import androidx.appcompat.widget.Toolbar
 import com.example.productstore.R
 import java.lang.StringBuilder
 

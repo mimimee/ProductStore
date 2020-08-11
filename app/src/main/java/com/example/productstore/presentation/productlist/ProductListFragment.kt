@@ -1,9 +1,8 @@
 package com.example.productstore.presentation.productlist
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.widget.SearchView
 import com.example.productstore.R
 import com.example.productstore.other.extensions.showBackButton
 import com.example.productstore.other.extensions.visible
@@ -16,6 +15,7 @@ class ProductListFragment : BaseFragment(), ProductListView {
     lateinit var presenter: ProductListPresenter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_productlist, container, false)
     }
 
@@ -54,7 +54,13 @@ class ProductListFragment : BaseFragment(), ProductListView {
                 .setStartDelay(50)
                 .setDuration(150)
                 .alpha(0F)
-                .setListener(presenter.getAnimatorListenerAdapter { fab.visible = false })
+                .setListener(presenter.getAnimatorListenerAdapter())
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater?.inflate(R.menu.productlist_menu, menu)
+        val searchItem = menu?.findItem(R.id.menu_search_item)
+        (searchItem?.actionView as SearchView).setOnQueryTextListener(presenter.searchQueryListener)
     }
 }

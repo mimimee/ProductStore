@@ -13,4 +13,5 @@
     <string name="changes_saved">Changes have been saved!</string>
     <string name="product_removed">Product has been removed!</string>
     <string name="field_cannot_be_empty">Field cannot be empty </string>
+    <string name="search">Search</string>
 </resources>

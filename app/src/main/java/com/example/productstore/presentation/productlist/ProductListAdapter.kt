@@ -53,10 +53,12 @@ class ProductListAdapter(
                 product_name.text = item.name
                 product_price.text = item.price?.toRubles()
 
-                if (item.pictureUri.isNullOrEmpty()) return@run
-                Glide.with(context)
-                    .load(Uri.parse(item.pictureUri))
-                    .into(product_small_image)
+                if (item.pictureUri.isNullOrEmpty())
+                    product_small_image.setImageResource(R.drawable.ic_box)
+                else
+                    Glide.with(context)
+                        .load(Uri.parse(item.pictureUri))
+                        .into(product_small_image)
             }
         }
     }
