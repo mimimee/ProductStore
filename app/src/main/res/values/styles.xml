@@ -6,6 +6,10 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/mainBlue</item>
     </style>
 
+    <style name="HintTextAppearance" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textColor">@color/mainBlue</item>
+    </style>
 </resources>
