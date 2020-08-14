@@ -1,6 +1,6 @@
 package com.example.productstore.presentation.productlist
 
-enum class EDITING_EVENT {
+enum class EditingEvent {
     EDIT,
     ADD,
     DELETE,

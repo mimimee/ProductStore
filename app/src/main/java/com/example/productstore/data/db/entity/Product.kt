@@ -8,6 +8,7 @@ data class Product(
     var name: String? = "",
     var price: Float? = 0F,
     var pictureUri: String? = "",
+    var storageAddress: String? = "",
     @PrimaryKey(autoGenerate = true)
     var id: Long? = null
 )
