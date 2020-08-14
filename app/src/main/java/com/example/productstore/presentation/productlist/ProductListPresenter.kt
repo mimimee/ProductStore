@@ -13,7 +13,7 @@ import com.example.productstore.R
 import com.example.productstore.data.db.entity.Product
 import com.example.productstore.other.cicerone.Screens
 import com.example.productstore.presentation.productdetails.EDIT_PRODUCT_ID
-import com.example.productstore.presentation.productlist.EDITING_EVENT.*
+import com.example.productstore.presentation.productlist.EditingEvent.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,7 +26,7 @@ class ProductListPresenter : MvpPresenter<ProductListView>() {
     private val uiScope = CoroutineScope(Dispatchers.Main)
     private var lastClickedItemPosition = -1
     private val fullResults = arrayListOf<Product>()
-    private var editingEvent: EDITING_EVENT? = null
+    private var editingEvent: EditingEvent? = null
     val searchQueryListener = getSearchQueryWatcher()
     val adapter = ProductListAdapter(
         onItemClickListener = ::openEditingScreen,
@@ -68,6 +68,7 @@ class ProductListPresenter : MvpPresenter<ProductListView>() {
                 EDIT -> adapter.notifyItemChanged(lastClickedItemPosition)
                 DELETE -> adapter.notifyItemRemoved(lastClickedItemPosition)
                 ADD -> adapter.notifyItemInserted(adapter.itemCount - 1)
+                NONE -> {}
             }
         }
     }

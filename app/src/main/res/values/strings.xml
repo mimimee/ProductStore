@@ -9,7 +9,7 @@
     <string name="your_list_is_empty">Your list is empty</string>
     <string name="name">Name</string>
     <string name="price">Price</string>
-    <string name="new_product_created">New product created!</string>
+    <string name="new_product_created">New product has been created!</string>
     <string name="changes_saved">Changes have been saved!</string>
     <string name="product_removed">Product has been removed!</string>
     <string name="field_cannot_be_empty">Field cannot be empty </string>

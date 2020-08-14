@@ -26,7 +26,6 @@ class App : Application() {
         val router: Router
             get() = cicerone.router
 
-
         fun setNavigator(navigator: Navigator) = cicerone.navigatorHolder.setNavigator(navigator)
         fun removeNavigator() = cicerone.navigatorHolder.removeNavigator()
     }

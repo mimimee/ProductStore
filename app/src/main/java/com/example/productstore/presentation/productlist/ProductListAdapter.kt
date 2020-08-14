@@ -65,6 +65,8 @@ class ProductListAdapter(
                 else
                     Glide.with(context)
                         .load(Uri.parse(item.pictureUri))
+                        .placeholder(R.drawable.ic_box)
+                        .error(R.drawable.ic_box)
                         .into(product_small_image)
             }
         }

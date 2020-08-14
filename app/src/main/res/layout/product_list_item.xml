@@ -39,7 +39,7 @@
         android:textColor="@android:color/black"
         android:textSize="@dimen/text_size_product_name"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/product_marker_icon"
+        app:layout_constraintEnd_toStartOf="@id/product_price"
         app:layout_constraintStart_toEndOf="@id/product_card"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Образец. Белый топ без верха." />
@@ -51,8 +51,8 @@
         android:layout_marginStart="@dimen/margin_8"
         android:src="@drawable/ic_marker"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/product_price"
-        app:layout_constraintStart_toEndOf="@id/product_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/product_price"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -64,8 +64,8 @@
         android:textColor="@color/dark_gray"
         android:textSize="@dimen/text_size_product_name"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/product_marker_icon"
+        app:layout_constraintEnd_toStartOf="@id/product_marker_icon"
+        app:layout_constraintStart_toEndOf="@id/product_name"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="1234.00р" />
 
